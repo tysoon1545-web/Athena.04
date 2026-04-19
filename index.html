@@ -2,79 +2,41 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Sistem Hatası!</title>
+    <title>SİSTEM KRİTİK!</title>
     <style>
         body { 
-            background-color: #000; 
-            color: #ff0000; 
-            font-family: 'Courier New', Courier, monospace; 
-            overflow: hidden; /* Sayfanın kaymasını engeller */
+            background-color: black; 
+            color: lime; 
+            text-align: center; 
+            font-family: 'Courier New', Courier, monospace;
+            padding-top: 150px;
         }
-        
-        .error-box {
-            position: absolute;
-            width: 300px;
-            padding: 20px;
-            background: #eee;
-            border: 2px solid #333;
-            color: #000;
-            box-shadow: 10px 10px 0px #888;
-            z-index: 100;
-        }
-
-        .error-header {
-            background: #000080;
-            color: white;
-            padding: 5px;
-            font-weight: bold;
-            margin: -20px -20px 15px -20px;
-        }
-
-        .rat-text {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 50px;
-            font-weight: bold;
-            z-index: 1000;
-            text-shadow: 5px 5px 10px red;
-            pointer-events: none;
-        }
+        h1 { font-size: 60px; color: red; text-shadow: 0 0 20px red; }
     </style>
 </head>
-<body onclick="createError()">
+<body>
 
-    <div class="rat-text">RATLADIN DOSTUM BTW</div>
+    <h1>RATLADIN DOSTUM BTW</h1>
+    <p>C:/Windows/System32/drivers/etc/host... [DELETED]</p>
+    <p>Kamera ve Mikrofon Erişimi Sağlandı...</p>
 
     <script>
-        // Ekranda rastgele yerlerde hata kutuları oluşturur
-        function createError() {
-            const box = document.createElement('div');
-            box.className = 'error-box';
-            
-            // Rastgele pozisyon
-            const x = Math.random() * (window.innerWidth - 300);
-            const y = Math.random() * (window.innerHeight - 200);
-            
-            box.style.left = x + 'px';
-            box.style.top = y + 'px';
-            
-            box.innerHTML = `
-                <div class="error-header">System Error - 404</div>
-                <p><strong>Error:</strong> Critical system failure detected.</p>
-                <p>Location: C:/Windows/System32/rat</p>
-                <button onclick="this.parentElement.remove()" style="float:right">Tamam</button>
-            `;
-            
-            document.body.appendChild(box);
+        // Sayfa açılır açılmaz klasik Windows hata kutularını fırlatır
+        function hataFirlat() {
+            alert("HATA: 0x80070005 - Erişim Engellendi!");
+            alert("Sistem dosyaları siliniyor...");
+            alert("RATLADIN DOSTUM BTW");
+            alert("Bunu kapatabileceğini mi sandın?");
         }
 
-        // Site açıldığında otomatik 5 tane hata çıkar
+        // Sayfa yüklenir yüklenmez çalıştır
         window.onload = function() {
-            for(let i = 0; i < 5; i++) {
-                setTimeout(createError, i * 300);
-            }
+            hataFirlat();
+        };
+
+        // Eğer bir yere tıklarsa tekrar uyarı çıksın
+        document.body.onclick = function() {
+            alert("Tıklama demiştim... Dosyaların şifreleniyor.");
         };
     </script>
 </body>
