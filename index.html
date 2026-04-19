@@ -1,14 +1,81 @@
 <!DOCTYPE html>
-<html>
+<html lang="tr">
 <head>
-    <title>Dikkat!</title>
+    <meta charset="UTF-8">
+    <title>Sistem Hatası!</title>
     <style>
-        body { background-color: black; color: red; text-align: center; font-family: sans-serif; padding-top: 100px; }
-        h1 { font-size: 50px; }
+        body { 
+            background-color: #000; 
+            color: #ff0000; 
+            font-family: 'Courier New', Courier, monospace; 
+            overflow: hidden; /* Sayfanın kaymasını engeller */
+        }
+        
+        .error-box {
+            position: absolute;
+            width: 300px;
+            padding: 20px;
+            background: #eee;
+            border: 2px solid #333;
+            color: #000;
+            box-shadow: 10px 10px 0px #888;
+            z-index: 100;
+        }
+
+        .error-header {
+            background: #000080;
+            color: white;
+            padding: 5px;
+            font-weight: bold;
+            margin: -20px -20px 15px -20px;
+        }
+
+        .rat-text {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 50px;
+            font-weight: bold;
+            z-index: 1000;
+            text-shadow: 5px 5px 10px red;
+            pointer-events: none;
+        }
     </style>
 </head>
-<body>
-    <h1>RATLADIN DOSTUM BTW</h1>
-    <p>Sistemine sızıldı...</p>
+<body onclick="createError()">
+
+    <div class="rat-text">RATLADIN DOSTUM BTW</div>
+
+    <script>
+        // Ekranda rastgele yerlerde hata kutuları oluşturur
+        function createError() {
+            const box = document.createElement('div');
+            box.className = 'error-box';
+            
+            // Rastgele pozisyon
+            const x = Math.random() * (window.innerWidth - 300);
+            const y = Math.random() * (window.innerHeight - 200);
+            
+            box.style.left = x + 'px';
+            box.style.top = y + 'px';
+            
+            box.innerHTML = `
+                <div class="error-header">System Error - 404</div>
+                <p><strong>Error:</strong> Critical system failure detected.</p>
+                <p>Location: C:/Windows/System32/rat</p>
+                <button onclick="this.parentElement.remove()" style="float:right">Tamam</button>
+            `;
+            
+            document.body.appendChild(box);
+        }
+
+        // Site açıldığında otomatik 5 tane hata çıkar
+        window.onload = function() {
+            for(let i = 0; i < 5; i++) {
+                setTimeout(createError, i * 300);
+            }
+        };
+    </script>
 </body>
 </html>
