@@ -2,63 +2,41 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>SİSTEM KRİTİK!</title>
+    <title>Sistem Mesajı</title>
     <style>
-        body { background-color: #008080; overflow: hidden; font-family: 'Tahoma', sans-serif; cursor: pointer; }
-        .win-error {
-            position: absolute; width: 300px; background: #ced0cf;
-            border: 2px solid; border-color: #fff #555 #555 #fff;
-            padding: 2px; z-index: 1000; box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+        body { 
+            background-color: black; 
+            color: white; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+            font-family: sans-serif; 
+            cursor: pointer;
+            text-align: center;
         }
-        .win-header {
-            background: linear-gradient(90deg, #000080, #1084d0);
-            color: white; padding: 3px 10px; font-weight: bold; font-size: 12px;
-        }
-        .win-content { padding: 15px; color: black; font-size: 12px; text-align: center; background: #ced0cf; }
-        .main-text {
-            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            color: white; font-size: 40px; font-weight: bold; text-align: center; text-shadow: 2px 2px #000;
-        }
+        h1 { font-size: 60px; text-shadow: 0 0 20px red; color: red; }
+        p { font-size: 20px; color: #555; }
     </style>
 </head>
-<body onclick="herSeyiBaslat()">
+<body onclick="calistir()">
 
-    <div class="main-text">SİSTEM HATASI!<br><span style="font-size: 18px; color: yellow;">Devam etmek için BURAYA TIKLA</span></div>
+    <div id="icerik">
+        <h1>RATLADIN DOSTUM BTW</h1>
+        <p>(Devam etmek için ekrana tıkla...)</p>
+    </div>
 
-    <audio id="idiotSound" loop>
-        <source src="https://www.soundboard.com/handler/DownLoadTrack.ashx?cliptitle=You+are+an+idiot&filename=mt/mtkzntm1ndyxmtk1otm3_v_2f_2bdy99v_2fsmo.mp3" type="audio/mpeg">
+    <audio id="sarki" loop>
+        <source src="https://files.catbox.moe/6rge8f.mp3" type="audio/mpeg">
     </audio>
 
     <script>
-        let caliyorMu = false;
-
-        function herSeyiBaslat() {
-            const ses = document.getElementById("idiotSound");
-            
-            // Sesi çalmaya zorla
-            ses.play().catch(e => console.log("Ses başlatılamadı, etkileşim bekleniyor."));
-            
-            if (!caliyorMu) {
-                // Pencereleri fırlatmaya başla
-                setInterval(spawnWindow, 400);
-                caliyorMu = true;
-                document.querySelector(".main-text").innerHTML = "RATLADIN DOSTUM BTW!<br>HA HA HA HA!";
-            }
-        }
-
-        function spawnWindow() {
-            const win = document.createElement('div');
-            win.className = 'win-error';
-            win.style.left = Math.random() * (window.innerWidth - 300) + 'px';
-            win.style.top = Math.random() * (window.innerHeight - 150) + 'px';
-            win.innerHTML = `
-                <div class="win-header">Critical Error</div>
-                <div class="win-content">
-                    <img src="https://i.ibb.co/3sS7S3V/error-icon.png" style="width:30px; vertical-align:middle;">
-                    YOU ARE AN IDIOT!<br>HA HA HA HA HA!
-                </div>
-            `;
-            document.body.appendChild(win);
+        function calistir() {
+            var ses = document.getElementById("sarki");
+            ses.play();
+            // Tıklayınca alttaki küçük yazıyı kaldırır
+            document.querySelector("p").style.display = "none";
         }
     </script>
 </body>
