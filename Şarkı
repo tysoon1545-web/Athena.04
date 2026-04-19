@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>SİSTEM ÇÖKTÜ!</title>
+    <style>
+        body { background-color: #000; overflow: hidden; font-family: 'Tahoma', sans-serif; }
+        .win-error {
+            position: absolute; width: 300px; background: #ced0cf;
+            border: 2px solid; border-color: #fff #555 #555 #fff;
+            padding: 2px; z-index: 1000;
+        }
+        .win-header {
+            background: linear-gradient(90deg, #000080, #1084d0);
+            color: white; padding: 3px 10px; font-weight: bold; font-size: 12px;
+        }
+        .win-content { padding: 15px; color: black; font-size: 12px; text-align: center; }
+        .main-text {
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            color: white; font-size: 60px; font-weight: bold; text-align: center;
+        }
+    </style>
+</head>
+<body onclick="baslat()">
+
+    <div class="main-text">RATLADIN DOSTUM BTW<br><span style="font-size: 20px;">(Devam etmek için tıkla)</span></div>
+
+    <audio id="idiotSound" loop>
+        <source src="https://files.catbox.moe/6rge8f.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        function baslat() {
+            // Sesi çal
+            document.getElementById("idiotSound").play();
+            // Pencereleri fırlat
+            setInterval(spawnWindow, 500);
+        }
+
+        function spawnWindow() {
+            const win = document.createElement('div');
+            win.className = 'win-error';
+            win.style.left = Math.random() * (window.innerWidth - 300) + 'px';
+            win.style.top = Math.random() * (window.innerHeight - 150) + 'px';
+            win.innerHTML = `
+                <div class="win-header">Critical Error</div>
+                <div class="win-content">YOU ARE AN IDIOT!<br>HA HA HA HA HA!</div>
+            `;
+            document.body.appendChild(win);
+        }
+    </script>
+</body>
+</html>
