@@ -1,40 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>SİSTEM ÇÖKTÜ!</title>
+    <title>SİSTEM KRİTİK!</title>
     <style>
-        body { background-color: #000; overflow: hidden; font-family: 'Tahoma', sans-serif; }
+        body { background-color: #008080; overflow: hidden; font-family: 'Tahoma', sans-serif; cursor: pointer; }
         .win-error {
             position: absolute; width: 300px; background: #ced0cf;
             border: 2px solid; border-color: #fff #555 #555 #fff;
-            padding: 2px; z-index: 1000;
+            padding: 2px; z-index: 1000; box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
         }
         .win-header {
             background: linear-gradient(90deg, #000080, #1084d0);
             color: white; padding: 3px 10px; font-weight: bold; font-size: 12px;
         }
-        .win-content { padding: 15px; color: black; font-size: 12px; text-align: center; }
+        .win-content { padding: 15px; color: black; font-size: 12px; text-align: center; background: #ced0cf; }
         .main-text {
             position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            color: white; font-size: 60px; font-weight: bold; text-align: center;
+            color: white; font-size: 40px; font-weight: bold; text-align: center; text-shadow: 2px 2px #000;
         }
     </style>
 </head>
-<body onclick="baslat()">
+<body onclick="herSeyiBaslat()">
 
-    <div class="main-text">RATLADIN DOSTUM BTW<br><span style="font-size: 20px;">(Devam etmek için tıkla)</span></div>
+    <div class="main-text">SİSTEM HATASI!<br><span style="font-size: 18px; color: yellow;">Devam etmek için BURAYA TIKLA</span></div>
 
     <audio id="idiotSound" loop>
-        <source src="https://files.catbox.moe/6rge8f.mp3" type="audio/mpeg">
+        <source src="https://www.soundboard.com/handler/DownLoadTrack.ashx?cliptitle=You+are+an+idiot&filename=mt/mtkzntm1ndyxmtk1otm3_v_2f_2bdy99v_2fsmo.mp3" type="audio/mpeg">
     </audio>
 
     <script>
-        function baslat() {
-            // Sesi çal
-            document.getElementById("idiotSound").play();
-            // Pencereleri fırlat
-            setInterval(spawnWindow, 500);
+        let caliyorMu = false;
+
+        function herSeyiBaslat() {
+            const ses = document.getElementById("idiotSound");
+            
+            // Sesi çalmaya zorla
+            ses.play().catch(e => console.log("Ses başlatılamadı, etkileşim bekleniyor."));
+            
+            if (!caliyorMu) {
+                // Pencereleri fırlatmaya başla
+                setInterval(spawnWindow, 400);
+                caliyorMu = true;
+                document.querySelector(".main-text").innerHTML = "RATLADIN DOSTUM BTW!<br>HA HA HA HA!";
+            }
         }
 
         function spawnWindow() {
@@ -44,7 +53,10 @@
             win.style.top = Math.random() * (window.innerHeight - 150) + 'px';
             win.innerHTML = `
                 <div class="win-header">Critical Error</div>
-                <div class="win-content">YOU ARE AN IDIOT!<br>HA HA HA HA HA!</div>
+                <div class="win-content">
+                    <img src="https://i.ibb.co/3sS7S3V/error-icon.png" style="width:30px; vertical-align:middle;">
+                    YOU ARE AN IDIOT!<br>HA HA HA HA HA!
+                </div>
             `;
             document.body.appendChild(win);
         }
