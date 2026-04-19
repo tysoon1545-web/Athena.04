@@ -1,42 +1,106 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>SİSTEM KRİTİK!</title>
+    <title>Sistem Hatası!</title>
     <style>
-        body { 
-            background-color: black; 
-            color: lime; 
-            text-align: center; 
-            font-family: 'Courier New', Courier, monospace;
-            padding-top: 150px;
+        body { background-color: #008080; overflow: hidden; font-family: 'Tahoma', sans-serif; }
+
+        /* Windows 98 / XP tarzı hata penceresi */
+        .win-error {
+            position: absolute;
+            width: 350px;
+            background: #ced0cf;
+            border: 2px solid;
+            border-color: #fff #555 #555 #fff;
+            padding: 2px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+            z-index: 1000;
         }
-        h1 { font-size: 60px; color: red; text-shadow: 0 0 20px red; }
+
+        .win-header {
+            background: linear-gradient(90deg, #000080, #1084d0);
+            color: white;
+            padding: 3px 10px;
+            font-weight: bold;
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .win-content {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            font-size: 13px;
+            color: black;
+        }
+
+        .error-icon {
+            background: red;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-size: 25px;
+            font-weight: bold;
+            margin-right: 15px;
+            border: 2px solid white;
+        }
+
+        .win-btn {
+            width: 75px;
+            height: 23px;
+            background: #ced0cf;
+            border: 1px solid;
+            border-color: #fff #555 #555 #fff;
+            margin: 0 auto 10px auto;
+            display: block;
+            outline: none;
+        }
+
+        h1 { position: fixed; top: 40%; width: 100%; text-align: center; color: white; text-shadow: 2px 2px black; font-size: 50px; z-index: -1; }
     </style>
 </head>
-<body>
+<body onclick="spawnError()">
 
     <h1>RATLADIN DOSTUM BTW</h1>
-    <p>C:/Windows/System32/drivers/etc/host... [DELETED]</p>
-    <p>Kamera ve Mikrofon Erişimi Sağlandı...</p>
 
     <script>
-        // Sayfa açılır açılmaz klasik Windows hata kutularını fırlatır
-        function hataFirlat() {
-            alert("HATA: 0x80070005 - Erişim Engellendi!");
-            alert("Sistem dosyaları siliniyor...");
-            alert("RATLADIN DOSTUM BTW");
-            alert("Bunu kapatabileceğini mi sandın?");
+        function spawnError() {
+            const win = document.createElement('div');
+            win.className = 'win-error';
+            
+            // Rastgele pozisyonlar
+            const x = Math.random() * (window.innerWidth - 350);
+            const y = Math.random() * (window.innerHeight - 200);
+            
+            win.style.left = x + 'px';
+            win.style.top = y + 'px';
+            
+            win.innerHTML = `
+                <div class="win-header">
+                    <span>Critical Error</span>
+                    <span style="background:#ced0cf; color:black; padding:0 5px; border:1px solid #555;">X</span>
+                </div>
+                <div class="win-content">
+                    <div class="error-icon">X</div>
+                    <div>C:/Windows/System32/rat.exe bulunamadı ve sistem dosyaları silindi!</div>
+                </div>
+                <button class="win-btn" onclick="this.parentElement.remove()">Tamam</button>
+            `;
+            
+            document.body.appendChild(win);
         }
 
-        // Sayfa yüklenir yüklenmez çalıştır
+        // Başlangıçta 10 tane aç
         window.onload = function() {
-            hataFirlat();
-        };
-
-        // Eğer bir yere tıklarsa tekrar uyarı çıksın
-        document.body.onclick = function() {
-            alert("Tıklama demiştim... Dosyaların şifreleniyor.");
+            for(let i = 0; i < 10; i++) {
+                setTimeout(spawnError, i * 200);
+            }
         };
     </script>
 </body>
