@@ -6,37 +6,36 @@
     <style>
         body { 
             background-color: black; 
-            color: white; 
+            color: red; 
             display: flex; 
+            flex-direction: column;
             justify-content: center; 
             align-items: center; 
             height: 100vh; 
             margin: 0; 
-            font-family: sans-serif; 
+            font-family: 'Courier New', Courier, monospace;
             cursor: pointer;
             text-align: center;
         }
-        h1 { font-size: 60px; text-shadow: 0 0 20px red; color: red; }
-        p { font-size: 20px; color: #555; }
+        h1 { font-size: 70px; text-shadow: 0 0 30px red; margin-bottom: 10px; }
+        .sub { color: #444; font-size: 15px; letter-spacing: 2px; }
     </style>
 </head>
-<body onclick="calistir()">
+<body onclick="playMusic()">
 
-    <div id="icerik">
-        <h1>RATLADIN DOSTUM BTW</h1>
-        <p>(Devam etmek için ekrana tıkla...)</p>
-    </div>
+    <h1>Yusuf tekin istifa</h1>
+    <div class="sub">DEVAM ETMEK İÇİN TIKLA</div>
 
-    <audio id="sarki" loop>
-        <source src="https://files.catbox.moe/6rge8f.mp3" type="audio/mpeg">
+    <audio id="audioPlayer" loop>
+        <source src="ses.mp3" type="audio/mpeg">
     </audio>
 
     <script>
-        function calistir() {
-            var ses = document.getElementById("sarki");
-            ses.play();
-            // Tıklayınca alttaki küçük yazıyı kaldırır
-            document.querySelector("p").style.display = "none";
+        function playMusic() {
+            var audio = document.getElementById("audioPlayer");
+            audio.play();
+            // Tıklayınca alttaki yazıyı siler, sadece ana yazı kalır
+            document.querySelector(".sub").style.opacity = "0";
         }
     </script>
 </body>
